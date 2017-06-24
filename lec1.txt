@@ -1,0 +1,36 @@
+	GIT
+
+VCS (sistema de control de versiones):
+
+#
+Identificandonos en Git:
+  git config --global <user/core/merge>
+comprobando datos:
+  git config --list/git config <user/core/merge>
+	*git help <command> -> ayuda.
+
+#
+Iniciando un proyecto en Git:
+  git init -> proyecto vacio
+  git add <files> -> rastrear proyecto existente
+    git add <files> ->agregar a Staging Area(area de ensayo)
+
+
+tres areas principales:
+
+1) working directory(directorio de trabajo)
+2) staging area (area de ensayo)
+2) git directory (repositorio)
+
+-> los avances en el area de trabajo son AGREGADOS al area de ensayo:
+	git add file/*(todo)
+-> los archivos del area de ensayo se agregan finalmente al repositorio:
+	git commit file/*
+
+-------------
+#
+cambios añadidos entre <modified> y <staged>:
+  git diff <file>
+cambios añadidos entre <staged> y <commited>:
+  git diff --cached <file>
+
