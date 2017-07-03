@@ -4,10 +4,11 @@ VCS (sistema de control de versiones):
 
 #
 Identificandonos en Git:
-  git config --global <user/core/merge>
+  git config --global <user/core/merge>.<name,email/editor/tool>
 comprobando datos:
-  git config --list/git config <user/core/merge>
-	*git help <command> -> ayuda.
+  git config --list/git config <user/core/merge>.<name/editor/tool>
+	
+  *git help <command> -> ayuda.
 
 #
 Iniciando un proyecto en Git:
@@ -23,9 +24,12 @@ tres areas principales:
 2) git directory (repositorio)
 
 -> los avances en el area de trabajo son AGREGADOS al area de ensayo:
-	git add file/*(todo)
+	git add <file>/git add * = todo
 -> los archivos del area de ensayo se agregan finalmente al repositorio:
-	git commit file/*
+	git commit <file>/git commit <file> -m'<mensaje>'
+
+  -->agregar los archivos 'tracked' directamente al repositorio:
+	git commit -a/git commit -a -m'<mensaje>'
 
 -------------
 #
