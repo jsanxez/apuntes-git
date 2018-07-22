@@ -3,13 +3,13 @@
 VCS (sistema de control de versiones):
 
 
-----INICIANDO GIT----
+----INICIANDO GIT (git config + git init + git add)----
 #
   -->Identificandonos en Git:
 	git config --global <user/core/merge>.<name,email/editor/tool>
 
   -->comprobando datos:
-	git config --list/git config <user/core/merge>.<name/editor/tool>
+	git config --list / git config <user/core/merge>.<name/editor/tool>
 	
   *git help <command> -> ayuda.
 
@@ -27,41 +27,105 @@ Tres areas principales:
 2) Git directory (repositorio)
 
   -->Los avances en el area de trabajo son AGREGADOS al area de ensayo:
-	git add <file>/git add * = todo
+	git add <file> / git add * = todo
 
   -->Los archivos del area de ensayo se agregan finalmente al repositorio:
-	git commit <file>/git commit <file> -m'<mensaje>'
+	git commit <file> / git commit <file> -m'<mensaje>'
 
-  -->Agregar los archivos 'tracked' directamente al repositorio:
-	git commit -a/git commit -a -m'<mensaje>'
+  -->Agregar los archivos 'tracked' directamente al repositorio (committed):
+	git commit -a / git commit -a -m'<mensaje>'
+
+  -->Ver el estado de los archivos (untracked, unmodified, modified, 
+     staged, *committed):
+	git status/git status -s / git status --short = short (de manera 
+							      resumida)
 
 
-----COMPARAR LAS MODIFICACIONES REALIZADAS----
+----COMPARAR LAS MODIFICACIONES REALIZADAS (git diff)----
 #
-  -->Cambios añadidos entre <modified> y <staged>:
+  -->Cambios añadidos entre 'modified' y 'staged':
 	git diff <file>
 
-  -->Cambios añadidos entre <staged> y <commited>:
-	git diff --cached <file>
-
-
-----ELIMINAR ARCHIVOS----
+  -->Cambios añadidos entre 'staged' y 'committed':
+	git diff --cached <file> / git diff --staged <file>
+	
+	*'cached' y 'staged' son sinonimos (preferible usar 'cached')
+	
+----ELIMINAR ARCHIVOS (git rm)----
 #
   -->Eliminar archivo como cambio no registrado(staged):
 	rm <file>
 
   -->Eliminar archivo sin ser registrado(deleted):
 	git rm <file>
+
 	*recomendado en la mayoria de los casos
 
   -->Cancelar seguimiento de archivo(untracked):
 	git rm --cached <file>
 
-----RENOMBRAR ARCHIVOS----
+----RENOMBRAR ARCHIVOS (git mv)----
 #
   -->Renombrar archivo como cambio no registrado(deleted&untracked = staged):
 	mv <file_from> <file_to>
+
   -->Renombrar archivo sin ser registrado(renamed):
 	git mv <file_from> <file_to>
+
+----VER EL HISTORIAL DE CONFIRMACIONES (git log)----
+#
+  -->Visualizar archivos confirmados (committed):
+	git log
+
+  -->Visualizar tan solo los 'n' ultimos archivos (committed):
+	git log -<n>
+
+  -->Visualizar archivos confirmados a partir de una fecha exacta o relativa (committed):
+	git log --since="2 years 1 month 2 weeks 3 days 10 hours" --until="4 months"
+	git log --since="20-12-2017" --until="16-02-2018"
+	
+	*La opción 'since' y 'until' puedes ser exactos como relativos.
+
+   -->Visualizar archivos confirmados mediante una busqueda en los mensajes o autor(committed):
+	git log --grep="<mensaje>" / git log --author="<autor>"
+	
+	*Para filtrar de mejor manera se pueden combinar ambas opcciones. Si deseamos
+	 que ambos se cumplan (opcion1 && opcion2) tendremos que agregar
+	 '--all-match' (funciona igual sin este ultimo).
+
+  -->Visualizar las diferencias entre cada confirmación (committed):
+	git log -p
+
+	*Estos comandos pueden se combinados (git log -p -2)
+
+  -->Visualizar de manera estadisticas los cambios añadidos (committed):
+	git log --stat
+
+  -->Visualizar los archivos confirmados de manera mas personalizable (committed):
+	git log --pretty=(oneline, short, full, fuller, format)
+
+	*Dentro de las opcciones de 'pretty', 'oneline' es la que mas destaca.
+
+  -->Visualizar los archivos confirmados de manera mas personalizada (committed):
+	git log --pretty=format:"%h: (%an) %cr '%s'"
+
+	*La opcción 'format' muestra la salida mediante especificadores de formato.
+	 ejem: %h = hash abreviado, %an = author name, %cr = commiter date relative
+	       %s = subjetc o tema.
+
+	 La lista de especificadores de 'format' la podemos encontrar en la pagina de GIT.
+
+ -->Visualizar los archivos confirmados de manera grafica (committed):
+	git log --graph / git log --pretty=format:"%h: '%s'" --graph
+	
+	*todos los comandos son combinables, teniendo en cuenta la coherencia. 
+
+----DESHACER CAMBIOS----
+#
+  -->
+
+
+
+
 
 ..............................................................................
