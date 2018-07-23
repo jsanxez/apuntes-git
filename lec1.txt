@@ -1,3 +1,5 @@
+................................................................................
+
 	GIT
 
 VCS (sistema de control de versiones):
@@ -120,12 +122,71 @@ Tres areas principales:
 	
 	*todos los comandos son combinables, teniendo en cuenta la coherencia. 
 
-----DESHACER CAMBIOS----
+----DESHACER CAMBIOS (git checkout + git reset HEAD + git commit --amend)----
 #
-  -->
+  -->Descartar cambios en el directorio de trabajo (modified > staged, committed):
+	git checkout -- <file>
 
+  -->Descartar/quitar un archivo preparado (staged > modified):
+	git reset HEAD <file>
 
+  -->Modificar el mensaje de un commit reciente (committed):
+	git commit --amend
 
+  -->Agregar un archivo olvidado a un commit (staged > committed):
+	git add <file> = staged
+	git commit --amend
+	
+	*El ultimo comando automaticamente confirmará el archivo agregado.
 
+----ALIAS Y ETIQUETAS (git config --global alias + git tag)----
+#
+  -->Crear alias git (git config):
+	git config --global alias.<alias> '<subcomando,opcción>'
+	
+	*ejem: git config --global alias.unstage 'reset HEAD'
 
-..............................................................................
+  -->Crear alias externo (git config):
+	git config --global alias.<alias> '!<comando>'
+	
+	*ejem: git config --global alias.visual '!gitk'
+	 'gitk' es la version grafica de git.
+
+  -->Quitar alias (git config):
+	git config --global --unset alias.<alias>
+	git config --global --edit
+	<editor> ~/.gitconfig
+	
+	*Es aconsejable usar el primer comando, en el segundo se tendra que editar
+	 tanto como en el tercero.
+
+  -->Crear etiqueta ligera (committed):
+	git tag '<nombre_etiqueta>'
+	
+	*Se aplica al ultimo commit.
+
+  -->Crear etiqueta anotada (committed):
+	git tag -a <nombre_etiqueta> -m "<mensaje>"
+
+	*se aplica al ultimo commit.
+
+  -->Crear etiqueta anotada para un determinado commit (committed):
+	git tag -a <nombre_etiqueta> <checksum>
+
+	*En 'checksum' tan solo seria necesario los 7 primeros digitos.
+
+  -->Mostrar etiquetas (committed):
+	git tag
+
+  -->Mostrar la etiqueta del ultimo commit (commited):
+	git show
+	
+	*Muestra la ultima etiqueta por defecto, si no se le especifica.
+ 
+  -->Mostrar una determinada etiqueta y su commit (committed):
+	git show <nombre_etiqueta>
+
+  -->Quitar etiqueta (committed):
+	git tag -d <nombre_tag>
+
+....................................................................................
