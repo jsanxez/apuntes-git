@@ -1,0 +1,58 @@
+	RAMAS Y FUSIONES
+
+----RAMAS (git branch)----
+#
+  -->Crear una nueva rama:
+	git branch <nombre_rama>
+	git checkout -b <nombre_rama>
+
+	*Con el primer comando aun permanecerás en la rama actual.
+	 con la segunda cambiaras a la rama creada automaticamente.
+
+  -->Mostrar ramas creadas:
+	git branch
+	git branch --list
+	
+	*Este ultimo  se usa cuando queremos filtrar el resultado
+	 mediante patrones.
+
+  -->Cambiar de una rama a otra:
+	git checkout <nombre_rama>
+
+  -->Cambiar de nombre a una rama:
+	git branch -m <nombre_actual> <nombre_cambiar>
+	
+	*Este comando sirve tambien para mover una rama, por eso
+	 lo de la 'm' (move); 'M' (forzar move) equivalente a ' --move --force'.
+
+  -->Borrar una rama:
+	git branch -d <nombre_rama>
+	git branch -D <nombre_rama> / git branch --delete --force <...rama>
+	
+	*Para borrar una rama vacia, usar el primero; y si esta
+	 tiene commits dentro, usar el segundo (forzar borrado).
+	 Para borrar ramas que ya fusionaste y que ya no necesitas
+	 situate en la rama en la que fusionaste.
+
+  -->Mostrar bifurcaciones de manera grafica (ASCI):
+	git log --oneline --graph --all
+ 
+----FUSIONES (git merge)----
+#
+  -->Fusionar/absorber una rama en otra activa (principal):
+	git merge <nombre_rama>
+	
+	*Para fusionar una rama sobre otra, es necesario situarse
+	 en la rama que absorberá a la otra.
+  
+  -->Abortar una fusión:
+	git merge --abort
+
+  -->Ver ramas fusionadas con la rama activa:
+	git branch --merged
+
+  -->Ver ramas aun no fusionadas:
+	git branch --no-merged
+
+  -->Mostrar el ultimo commmit de cada rama:
+	git branch -v
