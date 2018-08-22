@@ -1,0 +1,8 @@
+	REPOSITORIOS REMOTOS
+
+----REMOTOS----
+  -->git remote add origin [url]
+     
+     No es necesario que el remoto se denomine origin.
+
+[... en proceso]
