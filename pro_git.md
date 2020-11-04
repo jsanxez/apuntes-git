@@ -199,6 +199,7 @@ Ignorar determinados archivos con *.gitignore*:
 Confirmar cambios:
 ```
 git commit                  # Abre el editor
+git commit -v               # Muestra los cambios realizados del diff
 git commit -m "<message>"   # Confirma (commit) sin abrir el editor
 git commit -am "<message>"  # Confirma un archivo no preparado directamente
 ```
