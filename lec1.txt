@@ -1,6 +1,4 @@
-................................................................................
-
-	GIT
+# PRO GIT
 
 VCS (sistema de control de versiones):
 
@@ -189,4 +187,3 @@ Tres areas principales:
   -->Quitar etiqueta (committed):
 	git tag -d <nombre_tag>
 
-....................................................................................
