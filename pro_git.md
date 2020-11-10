@@ -264,7 +264,7 @@ info/
 objects/
 refs/
 ```
-- El archivo *description* es utilizado tan solo por GitWeb (interfaz gráfica
+- El archivo *description* es utilizada tan solo por GitWeb (interfaz gráfica
   de Git).
 - *config* contiene las configuraciones propias del proyecto.
 - *info/* almacena un archivo *exclude* de exclusión aparte de *.gitignore*.
@@ -275,3 +275,4 @@ Mostrar el contenido de los blobs:
 ```
 git cat-file -p <hash>
 ```
+
