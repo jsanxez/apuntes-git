@@ -56,7 +56,7 @@ Tres areas principales:
   -->Eliminar archivo como cambio no registrado(staged):
 	rm <file>
 
-  -->Eliminar archivo sin ser registrado(deleted):
+  -->Eliminar archivo sin ser registrado como modificado (deleted):
 	git rm <file>
 
 	*recomendado en la mayoria de los casos

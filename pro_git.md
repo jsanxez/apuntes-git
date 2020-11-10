@@ -225,8 +225,53 @@ git diff --cached <file>
 git difftool --cached <file>
 git difftool --cached <file>
 ```
-
 > Mostrar las herramientas diff externas disponibles para la plataforma:
 > `git difftool --tool-help `.
 
+Eliminar archivos:
+```
+git rm <file>
+git rm -f <file>            # Fuerza la eliminación.
+git rm --cached <file>      # Remueve el archivo del index.
+```
+> `git rm` solo funciona con el directorio de trabajo limpio, la diferencia con
+> `rm` esta en que añade el cambio, `deleted: <file>`, al área de preparación y
+> el otro no: lo deja en el directorio de trabajo.
 
+> `git rm --cached` elimina el archivo del index (staging area) y lo mantiene
+> como *untracked*; puede ser utilizado con archivos que fueron agregados
+> accidentalmente al index.
+
+Moviendo o renombrando archivos:
+```
+git mv <file1> <file2>
+```
+> Se puede usar tanto `rm` como `git rm`, solo que este último resume tres
+> comandos en uno (conveniente): `mv <file1> <file2>`, `git rm <file1>` y `git
+> add <file2>`.
+
+### Entresijos de Git
+#### Los comandos de fontanería y porcelana
+Un repositorio recien creado, tras la ejecución de `git init` tiene los
+siguientes archivos dentro del directorio oculto *.git*:
+```
+HEAD
+branches/
+config
+description
+hooks/
+info/
+objects/
+refs/
+```
+- El archivo *description* es utilizado tan solo por GitWeb (interfaz gráfica
+  de Git).
+- *config* contiene las configuraciones propias del proyecto.
+- *info/* almacena un archivo *exclude* de exclusión aparte de *.gitignore*.
+- *hook/* contiene scripts propios del usuario como del servidor.
+- El archivo *index* almacena la información sobre el área de preparación.
+
+Mostrar el contenido de los blobs:
+```
+git cat-file -p <hash>
+```
