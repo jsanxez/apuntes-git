@@ -276,3 +276,23 @@ Mostrar el contenido de los blobs:
 git cat-file -p <hash>
 ```
 
+Eliminar ramas en el remoto:
+```
+git push origin :<branch>
+```
+> Las referencias son del tipo: `<origen>:<destino>` para los remotos, de modo
+> que se esta reemplazando "nada" en el destino, al tener este vacío.
+
+Ver historial de ubicaciones de HEAD:
+```
+git reflog
+```
+
+Mostrar las confirmaciones más una combinación con *reflog*.
+```
+git log -g
+```
+> Este último comando puede ser utilizado para ver alguna confirmación perdida;
+> para recuperarlo se tendría que crear una rama que apunte al commit a
+> recuperar `git branch -D recover-branch <hash>`.
+
