@@ -250,6 +250,7 @@ git mv <file1> <file2>
 > comandos en uno (conveniente): `mv <file1> <file2>`, `git rm <file1>` y `git
 > add <file2>`.
 
+
 ### Entresijos de Git
 #### Los comandos de fontanería y porcelana
 Un repositorio recien creado, tras la ejecución de `git init` tiene los
@@ -296,3 +297,32 @@ git log -g
 > para recuperarlo se tendría que crear una rama que apunte al commit a
 > recuperar `git branch -D recover-branch <hash>`.
 
+Mostrar aquellos objetos o commits no referenciados:
+```
+git fsck --full
+```
+> Aquellos archivos que son generados en el proceso intermediario de Git;
+> son eliminados de manera automática, pero también puede ser eliminados de
+> manera manual mediante `git gc` (gc de garbage collector).
+
+> En el caso de que se agregue un archivo enorme dentro del proyecto y se
+> elimine en la próxima confirmación, este seguirá siendo clonado, debido a que
+> en algún momento formó parte del proyecto.
+> Para eliminarlo:
+> `git count-objects -v` muestra de manera rápida el espacio utilizado.
+> `git verify-pack -v <objects.../idx> | sort -k 3 -n | tail -3` muestra el
+> contenido del archivo empaquetador generado a partir del comando `git gc`.
+> `git rev-list --objects --all | grep <hash>` muestra objetos binarios, hash
+> de confirmaciones y la ruta.
+> `git log --oneline --branches -- <large_file>` muestra todos los commits en
+> las que interviene el archivo que se esta buscando. 
+> `git filter-branch --index-filter 'git rm --cached --ignore-unmatch
+> <lg_file>' -- <hash>^..` reescribe las confirmaciones a partir de commit
+> indicado sin considerar el archivo pesado; esto creará un referencia alterna
+> que también deberá de ser eliminada además de las referencias del *reflog*:
+> `rm -Rf .git/refs/original`, `rm -Rf .git/logs/`, `git gc`
+
+Reemplazar un archivo modificado por la version del index (staging area):
+```
+git checkout -- <file>
+```
