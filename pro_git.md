@@ -1,12 +1,15 @@
 # Pro Git
 
-## Control de versiones
-### VCS
+## 1. Control de versiones
+
+### 1.1 VCS
+
 Un Sistema de Control de Versiones (VCS), registra los cambios
 realizados en un archivo o conjunto de archivos a lo largo del tiempo, para
 luego poder recuperar alguna versión anterior específica, si se desea.
 
-### Sistemas de control de versiones centralizados
+### 1.2 Sistemas de control de versiones centralizados
+
 Un único servidor que almacena todos los archivos versionados y desde el cuál
 los desarrolladores los descargan o revisan.
 
@@ -18,7 +21,8 @@ Este tipo de configuración es muy dependiende del servidor; si este cae, los
 desarrolladores estarán inactivos durante ese periodo, además de que puede el
 servidor corromperse y perder todos los archivos.
 
-### Sistemas de control de versiones distribuidos
+### 1.3 Sistemas de control de versiones distribuidos
+
 En los Sistemas de Control de Versiones Distruibuidos (DVCS), cada cliente del
 servidor descarga una copia completa de los archivos, no tan solo la última
 instantánea.
@@ -30,7 +34,8 @@ instantánea.
 Si es que llegase a ocurrir algún problema con el servidor, los archivos pueden
 ser fácilmente restaurados.
 
-### Qué es Git?
+### 1.4 Qué es Git?
+
 Una diferencia principal entre otros VCS y Git es que estos gestionan sus datos
 como una serie de cambios entre los archivos, también descrito como control de
 versión basado en delta.
@@ -52,7 +57,8 @@ suma de comprobación hash SHA-1 de 40 caracteres hexadecimales calculados a
 partir del contenido del archivo o la estructura del directorio, por lo tanto,
 cualquier mínimo cambio es detectado por Git.
 
-#### Los tres estados de Git
+#### 1.4.1 Los tres estados de Git
+
 Los archivos pueden estar en tres estados: modified (modificado), staged
 (preparado) y committed (confirmado).
 
@@ -96,10 +102,10 @@ En este caso, se tiene en consideración que los archivos, en un primer momento,
 tendrán un estado *untracked* cuando se inicia el proyecto y que al agregarlos,
 pasarán directamente al área de preparación (staged).
 
+## 2. Fundamentos Git
 
-## Fundamentos Git
+### 2.1 Configuraciones
 
-### Configuraciones
 Git tiene una herramienta llamada `git config` que permite mostrar o
 configurar variables que controlan todos los aspectos de como Git se muestra y
 funciona. Estas variables pueden ser almacenadas en diferentes lugares:
@@ -114,7 +120,8 @@ funciona. Estas variables pueden ser almacenadas en diferentes lugares:
   del respositorio. Para mostrar o modificar los valores de este archivo se
 utiliza el comando `git config --local`, que es en sí por defecto.
 
-#### Configuraciones de usuario
+#### 2.1.1 Configuraciones de usuario
+
 La primera configuración a realizar en Git es registrar datos del usuario como
 nombre o email. Esto es necesario porque los commits van acompañados de esta
 información y permite identificarlos frente a otros usuarios que podrían
@@ -122,7 +129,6 @@ trabajar en el mismo proyecto.
 
 También se puede establecer el editor a utilizar y la herramienta diff para
 comparar los archivos. Ejemplo:
-
 ```
 git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
@@ -133,17 +139,17 @@ git config --global diff.tool vimdiff
 Para sobrescribir la información de usuario para un proyecto en específico, se
 utiliza el comando de configuración sin la opción `--global`.
 
-#### Configurando el nombre de la rama por defecto
+#### 2.1.2 Configurando el nombre de la rama por defecto
+
 Al iniciar Git en un proyecto, este crea por defecto una rama con el nombre de
 *master*, para cambiar el nombre de la rama se tiene el siguiente comando:
-
 ```
 git config --global init.defaultBranch new_name
 ```
 
-#### Verificando la configuración
-Para mostrar las configuraciones realizadas o la ruta de la cual provienen:
+#### 2.1.3 Verificando la configuración
 
+Para mostrar las configuraciones realizadas o la ruta de la cual provienen:
 ```
 git config user.name                # muestra el nombre del usuario configurado
 git config --list                   # lista toda la configuración
@@ -154,19 +160,22 @@ git config --show-origin user.name  # nombre del usuario y ruta de origen
 > Para obtener ayuda:
 > `git help <option>`, `git <value> -h`.
 
-### Repositorios
+### 2.2 Repositorios
+
 Clonar un repositorio existente:
 ```
 git clone <url>
 git clone <url> <dir_name>  # Clona el repositorio dentro  del directorio
                               especificado.
 ```
+
 > *\<url\>* puede ser cualquier protocolo de transferencia, como ssh.
 
 Inicializar un repositorio en un proyecto nuevo:
 ```
 git init
 ```
+
 > Esto crea el directorio *.git* dentro del proyecto con los archivos
 > necesarios del repositorio.
 
@@ -174,6 +183,7 @@ Iniciar el seguimiento de los archivos o añadirlos al *staging area*:
 ```
 git add <files>
 ```
+
 > Las expresiones regulares pueden ser utilizadas en Git, por lo tanto:
 > ```
 > git add .               # Agrega todos los archivos al staging area
@@ -186,6 +196,7 @@ Ignorar determinados archivos con *.gitignore*:
 *.[oia]
 *~
 ```
+
 > Los patrones listados en *.gitignore* no serán mostrados como archivos sin
 > rastrear; útil cuando se generan trazas o archivos generados por el
 > compilador que no se quieren incluir por error en el proyecto.
@@ -225,6 +236,7 @@ git diff --cached <file>
 git difftool --cached <file>
 git difftool --cached <file>
 ```
+
 > Mostrar las herramientas diff externas disponibles para la plataforma:
 > `git difftool --tool-help `.
 
@@ -234,6 +246,7 @@ git rm <file>
 git rm -f <file>            # Fuerza la eliminación.
 git rm --cached <file>      # Remueve el archivo del index.
 ```
+
 > `git rm` solo funciona con el directorio de trabajo limpio, la diferencia con
 > `rm` esta en que añade el cambio, `deleted: <file>`, al área de preparación y
 > el otro no: lo deja en el directorio de trabajo.
@@ -246,13 +259,42 @@ Moviendo o renombrando archivos:
 ```
 git mv <file1> <file2>
 ```
+
 > Se puede usar tanto `rm` como `git rm`, solo que este último resume tres
 > comandos en uno (conveniente): `mv <file1> <file2>`, `git rm <file1>` y `git
 > add <file2>`.
 
+### 2.3 Historial de confirmaciones
 
-### Entresijos de Git
-#### Los comandos de fontanería y porcelana
+Mostrar el historial de confirmaciones:
+```
+git log                             # Historial de commits detallados.
+git log -p                          # Historial de commits más las diferencias.
+git log -2                          # Solo los dos últimos commits.
+git log --stat                      # Estadística de los cambios.
+git log --pretty=<oneline,...full>  # Cambia el formato de salida.
+git log --pretty=format:"<format>"  # Utiliza un formato personalizado.
+git log --graph                     # Muestra gráficamente las ramificaciones.
+git log --since=<n>.<time>          # Commits desde cierto tiempo.
+git log -S<string>                  # Commits con respecto al "string" buscado.
+git log -- <file>                   # Commits relacionados con el archivo.
+```
+
+> Muchos de las opciones pueden ser combinadas entre si.
+> Las opciones `--since` y `--until` pueden aceptar valores específicos como
+> relativos.
+> La salida también puede ser filtrada mediante autor con `--author` y buscar
+> palabras clave con `--grep`:
+> `git --grep=<key> --author=<name> --all-match`
+> El filtro por archivo (`-- <file>`) deber ser al final, donde los guiones
+> separan la ruta del archivo de las opciones.
+
+### 2.4 Deshacer cosas
+
+### 2.5 Entresijos de Git
+
+#### 2.5.1 Los comandos de fontanería y porcelana
+
 Un repositorio recien creado, tras la ejecución de `git init` tiene los
 siguientes archivos dentro del directorio oculto *.git*:
 ```
