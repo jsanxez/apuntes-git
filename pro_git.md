@@ -247,9 +247,9 @@ git rm -f <file>            # Fuerza la eliminación.
 git rm --cached <file>      # Remueve el archivo del index.
 ```
 
-> `git rm` solo funciona con el directorio de trabajo limpio, la diferencia con
-> `rm` esta en que añade el cambio, `deleted: <file>`, al área de preparación y
-> el otro no: lo deja en el directorio de trabajo.
+> `git rm` solo funciona con el directorio de trabajo limpio; la diferencia con
+> `rm` esta en que añade el cambio, *deleted: \<file\>*, al área de preparación
+> y el otro no, lo deja en el directorio de trabajo.
 
 > `git rm --cached` elimina el archivo del index (staging area) y lo mantiene
 > como *untracked*; puede ser utilizado con archivos que fueron agregados
@@ -291,6 +291,39 @@ git log -- <file>                   # Commits relacionados con el archivo.
 
 ### 2.4 Deshacer cosas
 
+Deshacer commit para modificarlo:
+```
+git commit --amend
+```
+> Permite añadir archivos olvidados o editar el mensaje del commit.
+
+Descartar los cambios en el directorio de trabajo:
+```
+git checkout -- <file>
+git restore <file>                      # Comando nuevo
+git restore --worktree <file>           # (Default)
+```
+> Es necesario que exista una versión del archivo en el Index.
+
+Quitar al área de trabajo un archivo preparado:
+```
+git reset HEAD <file>
+git restore --staged <file>             # Comando nuevo
+git restore -S <file>                   # Forma corta
+```
+> Si existe un estado modificado del archivo, este se conserva.
+
+Restaurar archivo a una versión determinada:
+```
+git reset HEAD~<número> <file>          # Reemplaza en stagging area
+git restore --source <version> <file>   # Reemplaza en working area
+```
+> El primer comando *prepara* los cambios traídos de la versión especificada y,
+> si existe un estado modificado del archivo, lo mantiene; y si no, se mueve el
+> anterior cambio preparado al área de trabajo. El segundo, trae los cambios de
+> la versión especificada directamente al área de trabajo, reemplazando su
+> contenido.
+
 ### 2.5 Entresijos de Git
 
 #### 2.5.1 Los comandos de fontanería y porcelana
@@ -298,8 +331,7 @@ git log -- <file>                   # Commits relacionados con el archivo.
 Un repositorio recien creado, tras la ejecución de `git init` tiene los
 siguientes archivos dentro del directorio oculto *.git*:
 ```
-HEAD
-branches/
+HEAD branches/
 config
 description
 hooks/
