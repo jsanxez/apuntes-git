@@ -324,9 +324,22 @@ git restore --source <version> <file>   # Reemplaza en working area
 > la versión especificada directamente al área de trabajo, reemplazando su
 > contenido.
 
-### 2.5 Entresijos de Git
+### 2.5 Trabajar con Remotos
 
-#### 2.5.1 Los comandos de fontanería y porcelana
+Mostrar nombre y URL de los remotos:
+```
+git remote              # Nombre del remoto
+git remote -v           # URL asociada al remoto
+```
+
+Añadir repositorios remotos:
+```
+git remote add <nombre> <url>
+```
+
+## 10. Entresijos de Git
+
+### 10.1 Los comandos de fontanería y porcelana
 
 Un repositorio recien creado, tras la ejecución de `git init` tiene los
 siguientes archivos dentro del directorio oculto *.git*:
