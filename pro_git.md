@@ -337,6 +337,49 @@ Añadir repositorios remotos:
 git remote add <nombre> <url>
 ```
 
+Traer y combinar remotos:
+```
+git fetch <remote-name> # Trae los datos del servidor
+git pull                # Trae y combina automáticamente
+```
+> - La combinación con `fetch` se realiza de manera manual a diferencia de
+>   `pull` que combina los datos del servidor remoto con el local
+>   automáticamente.
+> - `git clone` indica a la rama maestra local rastrear la rama maestra remota
+>   automáticamente.
+
+Enviar a remotos:
+```
+git push <remote> <branch>
+```
+> La parte de *branch* hace referencia al nombre de la rama que quieres enviar
+> al remoto.
+
+Inspeccionar un remoto:
+```
+git remote show <remote>
+```
+> Muestra información relevante como URL de `fetch` y `push`, ramas rastredas,
+> y ramas configuradas para combinar con `git pull` y ramas a las que enviar
+> con `git push`.
+
+Eliminar y renombrar remotos:
+```
+git remote rename <old> <new>   # Renombrar remoto
+git remote remove <remote>      # Eliminar remoto
+git remote rm <remote>          # Eliminar remoto (forma corta)
+```
+
+> - Cuando se clona un repositorio, el nombre del remoto automáticamente será
+>   *origin*.
+
+### 2.6 Etiquetado (etiquetas)
+
+Listando etiquetas:
+```
+git tag
+```
+
 ## 10. Entresijos de Git
 
 ### 10.1 Los comandos de fontanería y porcelana
